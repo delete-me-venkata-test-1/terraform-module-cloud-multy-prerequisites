@@ -56,4 +56,3 @@ output "tenant_readme" {
     "placeholder_tenant_github_org_name", "${var.tenant_github_org_name}"),
   "placeholder_tools_version", "${local.tools_version}")
 }
-

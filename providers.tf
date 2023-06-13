@@ -2,15 +2,12 @@ terraform {
   required_providers {
     cloudflare = {
       source  = "cloudflare/cloudflare"
-      version = "4.5.0"
     }
     aws = {
       source  = "hashicorp/aws"
-      version = "4.67.0"
     }
     random = {
       source  = "hashicorp/random"
-      version = "3.5.1"
     }
   }
 }
@@ -46,4 +43,3 @@ provider "aws" {
     role_arn = "arn:aws:iam::${var.tenant_account_id}:role/OrganizationAccountAccessRole"
   }
 }
-
