@@ -134,5 +134,6 @@ output "opsgenie_integration_api_key" {
     env => opsgenie_api_integration.opsgenie-api-key[env].api_key
   }
   description = "The API key for the Opsgenie API integration for each environment."
+  sensitive = false
 }
 
