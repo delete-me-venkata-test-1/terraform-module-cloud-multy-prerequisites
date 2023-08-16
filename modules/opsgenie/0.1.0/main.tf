@@ -101,14 +101,34 @@ output "opsgenie_prometheus_api_keys" {
 resource "opsgenie_heartbeat" "heartbeat" {
   for_each = local.cluster_environments_set
 
-  name = "${var.tenant_key}-${each.value}-heartbeat"
-  description = "This is for company ${var.tenant_key} in the ${each.value} environment"
-  interval = 5
+  name          = "${var.tenant_key}-${each.value}-heartbeat"
+  description   = "This is for company ${var.tenant_key} in the ${each.value} environment"
+  interval      = 5
   interval_unit = "minutes"
-  enabled = true
+  enabled       = true
   owner_team_id = opsgenie_team.teams[each.key].id
 
-  alert_message = "Heartbeat [${each.value}] is inactive. Check ArgoCD cluster status"
-  alert_tags = ["ArgoCD", each.value]
+  alert_message  = "Heartbeat [${each.value}] is inactive. Check ArgoCD cluster status"
+  alert_tags     = ["ArgoCD", each.value]
   alert_priority = "P2"
+}
+
+#Creates an API key
+resource "opsgenie_api_integration" "opsgenie-api-key" {
+  for_each = local.cluster_environments_set
+
+  name = "${var.tenant_key}-${each.value}-heartbeat"
+  type = "API"
+
+  enabled                        = true
+  allow_write_access             = true
+  ignore_responders_from_payload = true
+  suppress_notifications         = true
+  owner_team_id                  = opsgenie_team.teams[each.key].id
+}
+
+#to see the key
+output "opsgenie_integration_api_key" {
+  value = opsgenie_api_integration.opsgenie-api-key.api_key
+  description = "The API key for the Opsgenie API integration."
 }
