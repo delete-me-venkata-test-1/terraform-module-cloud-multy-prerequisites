@@ -121,7 +121,7 @@ resource "opsgenie_api_integration" "opsgenie-api-key" {
   type = "API"
 
   enabled                        = true
-  allow_write_access             = true
+  allow_write_access             = false
   ignore_responders_from_payload = true
   suppress_notifications         = true
   owner_team_id                  = opsgenie_team.teams[each.key].id
