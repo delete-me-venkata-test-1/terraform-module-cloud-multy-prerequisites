@@ -129,6 +129,7 @@ resource "opsgenie_api_integration" "opsgenie-api-key" {
 
 #to see the key
 output "opsgenie_integration_api_key" {
+  for_each = local.cluster_environments_set
   value = opsgenie_api_integration.opsgenie-api-key[each.key]
   description = "The API key for the Opsgenie API integration."
 }
