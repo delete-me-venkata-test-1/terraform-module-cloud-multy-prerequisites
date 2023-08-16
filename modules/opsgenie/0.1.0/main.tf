@@ -117,7 +117,7 @@ resource "opsgenie_heartbeat" "heartbeat" {
 resource "opsgenie_api_integration" "opsgenie-api-key" {
   for_each = local.cluster_environments_set
 
-  name = "${var.tenant_key}-${each.value}-heartbeat"
+  name = "${var.tenant_key}-${each.value}-APIKey"
   type = "API"
 
   enabled                        = true
