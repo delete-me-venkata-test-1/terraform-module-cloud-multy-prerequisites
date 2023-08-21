@@ -127,12 +127,11 @@ resource "opsgenie_api_integration" "opsgenie-api-key" {
 
   enabled                        = true
   allow_write_access             = true
-  ignore_responders_from_payload = true
+  ignore_responders_from_payload = false
   suppress_notifications         = false
   owner_team_id                  = opsgenie_team.teams[each.key].id
 }
 
-#to see the key
 output "opsgenie_integration_api_key" {
   value = {
     for env in local.cluster_environments_set :
