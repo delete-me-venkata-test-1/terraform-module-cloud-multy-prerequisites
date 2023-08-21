@@ -3,6 +3,7 @@ locals {
   random_password_length             = 45
   random_password_special_characters = false
 }
+
 resource "random_password" "dex_argocd_client_secret" {
   for_each = local.cluster_environments
   length   = local.random_password_length
@@ -35,12 +36,12 @@ resource "random_password" "grafana_admin_secret" {
 }
 
 locals {
-  vault_access_tokens_s3_key= "hashicorp-vault-init/vault_access.json"
+  vault_access_tokens_s3_key = "hashicorp-vault-init/vault_access.json"
 }
 
 module "glueops_platform_helm_values" {
   for_each                                   = local.environment_map
-  source                                     = "git::https://github.com/GlueOps/platform-helm-chart-platform.git?ref=v0.29.0"
+  source                                     = "git::https://github.com/GlueOps/platform-helm-chart-platform.git?ref=feature/add-cluster-monitoring"
   captain_repo_b64encoded_private_deploy_key = base64encode(module.captain_repository[each.value.environment_name].private_deploy_key)
   captain_repo_ssh_clone_url                 = module.captain_repository[each.value.environment_name].ssh_clone_url
   this_is_development                        = var.this_is_development
@@ -65,6 +66,7 @@ module "glueops_platform_helm_values" {
   aws_region                                 = var.primary_region
   tenant_key                                 = var.tenant_key
   opsgenie_api_key                           = lookup(module.opsgenie_teams.opsgenie_prometheus_api_keys, split(".", each.value.environment_name)[0], null)
+  opsgenie_api_key_cluster_monitoring        = lookup(module.opsgenie_teams.opsgenie_integration_api_key, split(".", each.value.environment_name)[0], null)
   admin_github_org_name                      = each.value.admin_github_org_name
   tenant_github_org_name                     = each.value.tenant_github_org_name
   grafana_admin_password                     = random_password.grafana_admin_secret[each.value.environment_name].result
