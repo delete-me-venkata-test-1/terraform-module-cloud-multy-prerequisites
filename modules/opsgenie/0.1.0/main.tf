@@ -120,10 +120,15 @@ resource "opsgenie_api_integration" "opsgenie-api-key" {
   name = "${var.tenant_key}-${each.value}-APIKey"
   type = "API"
 
+  responders {
+    type = "team"
+    id   = opsgenie_team.teams[each.key].id
+  }
+
   enabled                        = true
   allow_write_access             = true
-  ignore_responders_from_payload = false
-  suppress_notifications         = true
+  ignore_responders_from_payload = true
+  suppress_notifications         = false
   owner_team_id                  = opsgenie_team.teams[each.key].id
 }
 
