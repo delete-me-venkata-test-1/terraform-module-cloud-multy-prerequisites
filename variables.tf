@@ -119,7 +119,7 @@ locals {
 
 locals {
   cluster_environments                  = toset(keys(local.environment_map))
-  opsgenie_enabled_cluster_environments = [for env in var.cluster_environments : env.environment_name if lookup(item, "opsgenie_enabled", true)]
+  opsgenie_enabled_cluster_environments = [for env in var.cluster_environments : env.environment_name if lookup(env, "opsgenie_enabled", true)]
 
 }
 
