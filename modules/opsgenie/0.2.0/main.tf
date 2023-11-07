@@ -1,6 +1,6 @@
 locals {
   users_set                = toset(var.users)
-  cluster_environments_set = toset(var.cluster_environments)
+  cluster_environments_set = var.cluster_environments
   time_zone                = "UTC"
   rotation_start_date      = "2023-03-14T20:00:00Z" # Tuesday at 12pm PST (with daylight savings) - Set the start date and time for the rotation
 }
