@@ -1,6 +1,6 @@
 locals {
   users_set                = toset(var.users)
-  cluster_environments_set = toset(var.cluster_environments)
+  cluster_environments_set = toset(keys(var.cluster_environments))
   time_zone                = "UTC"
   rotation_start_date      = "2023-03-14T20:00:00Z" # Tuesday at 12pm PST (with daylight savings) - Set the start date and time for the rotation
 }
@@ -31,7 +31,7 @@ resource "opsgenie_team_routing_rule" "routing_rules" {
   for_each = local.cluster_environments_set
 
   name     = "${var.tenant_key}-${each.value}-routing-rule"
-  team_id  = opsgenie_team.teams[each.key].id
+  team_id  = var.cluster_environments[each.value]["opsgenie_routing_enabled"] ? opsgenie_team.teams[each.key].id : "nobody"
   order    = 0
   timezone = local.time_zone
   criteria {

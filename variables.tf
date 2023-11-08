@@ -49,7 +49,7 @@ variable "cluster_environments" {
     github_tenant_app_b64enc_private_key = string
     admin_github_org_name                = string
     tenant_github_org_name               = string
-    opsgenie_enabled                     = bool
+    opsgenie_routing_enabled             = bool
     vault_github_org_team_policy_mappings = list(object({
       oidc_groups = list(string)
       policy_name = string
@@ -77,7 +77,7 @@ variable "cluster_environments" {
       github_tenant_app_b64enc_private_key = "tenant-github-app-b64enc-private-key"
       admin_github_org_name                = "GlueOps"
       tenant_github_org_name               = "glueops-rocks"
-      opsgenie_enabled                     = true
+      opsgenie_routing_enabled             = true
       glueops_kubernetes_operators = {
         waf = {
           aws_access_key = "aws-access-key-secret-id"
@@ -119,8 +119,6 @@ locals {
 
 locals {
   cluster_environments                  = toset(keys(local.environment_map))
-  opsgenie_enabled_cluster_environments = toset([for env in var.cluster_environments : env.environment_name if lookup(env, "opsgenie_enabled", true)])
-
 }
 
 variable "primary_region" {
