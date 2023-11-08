@@ -81,7 +81,9 @@ resource "opsgenie_notification_policy" "suppress_policy" {
   name               = "Policy to suppress alerts when alerting is disabled"
   team_id            = opsgenie_team.teams[each.key].id
   policy_description = "This policy has suppresses alerts"
-  suppress = true
+  suppress           = true
+
+  filter {}
 }
 
 resource "opsgenie_api_integration" "prometheus" {
