@@ -10,5 +10,5 @@ variable "tenant_key" {
 
 variable "cluster_environments" {
   description = "List of cluster environment names"
-  type        = list(string)
+  type        = map()
 }

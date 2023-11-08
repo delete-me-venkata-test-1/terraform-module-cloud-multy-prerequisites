@@ -118,7 +118,7 @@ locals {
 }
 
 locals {
-  cluster_environments                  = toset(keys(local.environment_map))
+  cluster_environments = toset(keys(local.environment_map))
 }
 
 variable "primary_region" {
