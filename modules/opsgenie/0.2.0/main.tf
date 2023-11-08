@@ -1,8 +1,9 @@
 locals {
-  users_set                = toset(var.users)
-  cluster_environments_set = toset(keys(var.cluster_environments))
-  time_zone                = "UTC"
-  rotation_start_date      = "2023-03-14T20:00:00Z" # Tuesday at 12pm PST (with daylight savings) - Set the start date and time for the rotation
+  users_set                  = toset(var.users)
+  cluster_environments_set   = toset(keys(var.cluster_environments))
+  notification_disabled_envs = toset([for env in var.cluster_environments : env.environment_name if lookup(env, "opsgenie_notification_enabled") == false])
+  time_zone                  = "UTC"
+  rotation_start_date        = "2023-03-14T20:00:00Z" # Tuesday at 12pm PST (with daylight savings) - Set the start date and time for the rotation
 }
 
 data "opsgenie_user" "users" {
@@ -31,7 +32,7 @@ resource "opsgenie_team_routing_rule" "routing_rules" {
   for_each = local.cluster_environments_set
 
   name     = "${var.tenant_key}-${each.value}-routing-rule"
-  team_id  = var.cluster_environments[each.value]["opsgenie_routing_enabled"] ? opsgenie_team.teams[each.key].id : "nobody"
+  team_id  = opsgenie_team.teams[each.key].id
   order    = 0
   timezone = local.time_zone
   criteria {
@@ -72,6 +73,15 @@ resource "opsgenie_schedule_rotation" "rotations" {
   start_date = local.rotation_start_date
   type       = "weekly"
   length     = 1
+}
+
+resource "opsgenie_notification_policy" "suppress_policy" {
+  for_each = local.notification_disabled_envs
+
+  name               = "Policy to suppress alerts when alerting is disabled"
+  team_id            = opsgenie_team.teams[each.key].id
+  policy_description = "This policy has suppresses alerts"
+  suppress = true
 }
 
 resource "opsgenie_api_integration" "prometheus" {
