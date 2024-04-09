@@ -42,7 +42,7 @@ locals {
 
 module "glueops_platform_helm_values" {
   for_each                                   = local.environment_map
-  source                                     = "git::https://github.com/GlueOps/platform-helm-chart-platform.git?ref=v0.40.0"
+  source                                     = "git::https://github.com/GlueOps/platform-helm-chart-platform.git?ref=feat/balaji"
   captain_repo_b64encoded_private_deploy_key = base64encode(module.captain_repository[each.value.environment_name].private_deploy_key)
   captain_repo_ssh_clone_url                 = module.captain_repository[each.value.environment_name].ssh_clone_url
   this_is_development                        = var.this_is_development
@@ -57,7 +57,7 @@ module "glueops_platform_helm_values" {
   loki_aws_access_key                        = aws_iam_access_key.loki_s3[each.value.environment_name].id
   loki_aws_secret_key                        = aws_iam_access_key.loki_s3[each.value.environment_name].secret
   cortex_aws_access_key                      = aws_iam_access_key.cortex_s3[each.value.environment_name].id
-  cortex_aws_secret_key                       = aws_iam_access_key.cortex_s3[each.value.environment_name].secret
+  cortex_aws_secret_key                      = aws_iam_access_key.cortex_s3[each.value.environment_name].secret
   loki_exporter_aws_access_key               = aws_iam_access_key.loki_log_exporter_s3[each.value.environment_name].id
   loki_exporter_aws_secret_key               = aws_iam_access_key.loki_log_exporter_s3[each.value.environment_name].secret
   certmanager_aws_access_key                 = aws_iam_access_key.certmanager[each.value.environment_name].id
