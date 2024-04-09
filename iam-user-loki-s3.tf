@@ -18,10 +18,3 @@ resource "aws_iam_access_key" "loki_s3" {
   user       = each.value.name
   depends_on = [aws_iam_user.loki_s3]
 }
-
-resource "aws_iam_access_key" "cortex_s3" {
-  for_each   = aws_iam_user.cortex_s3
-  provider   = aws.clientaccount
-  user       = each.value.name
-  depends_on = [aws_iam_user.cortex_s3]
-}
