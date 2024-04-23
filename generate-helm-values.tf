@@ -35,8 +35,8 @@ resource "random_password" "grafana_admin_secret" {
 }
 
 locals {
-  vault_access_tokens_s3_key = "hashicorp-vault-init/vault_access.json"
-  tls_cert_backup_s3_key_prefix = "tls-cert-backups"
+  vault_access_tokens_s3_key          = "hashicorp-vault-init/vault_access.json"
+  tls_cert_backup_s3_key_prefix       = "tls-cert-backups"
   tls_cert_restore_exclude_namespaces = "kube-system"
 }
 
@@ -58,6 +58,8 @@ module "glueops_platform_helm_values" {
   loki_aws_secret_key                        = aws_iam_access_key.loki_s3[each.value.environment_name].secret
   loki_exporter_aws_access_key               = aws_iam_access_key.loki_log_exporter_s3[each.value.environment_name].id
   loki_exporter_aws_secret_key               = aws_iam_access_key.loki_log_exporter_s3[each.value.environment_name].secret
+  fluentbit_exporter_aws_access_key          = aws_iam_access_key.fluentbit_log_exporter_s3[each.value.environment_name].id
+  fluentbit_exporter_aws_secret_key          = aws_iam_access_key.fluentbit_log_exporter_s3[each.value.environment_name].secret
   certmanager_aws_access_key                 = aws_iam_access_key.certmanager[each.value.environment_name].id
   certmanager_aws_secret_key                 = aws_iam_access_key.certmanager[each.value.environment_name].secret
   externaldns_aws_access_key                 = aws_iam_access_key.externaldns[each.value.environment_name].id
