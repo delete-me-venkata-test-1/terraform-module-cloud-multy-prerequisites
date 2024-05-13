@@ -32,4 +32,3 @@ resource "aws_iam_policy" "fluentbit_logs_exporter_s3" {
 }
 EOF
 }
-
