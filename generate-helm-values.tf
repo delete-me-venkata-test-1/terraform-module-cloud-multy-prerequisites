@@ -35,14 +35,14 @@ resource "random_password" "grafana_admin_secret" {
 }
 
 locals {
-  vault_access_tokens_s3_key = "hashicorp-vault-init/vault_access.json"
-  tls_cert_backup_s3_key_prefix = "tls-cert-backups"
+  vault_access_tokens_s3_key          = "hashicorp-vault-init/vault_access.json"
+  tls_cert_backup_s3_key_prefix       = "tls-cert-backups"
   tls_cert_restore_exclude_namespaces = "kube-system"
 }
 
 module "glueops_platform_helm_values" {
   for_each                                   = local.environment_map
-  source                                     = "git::https://github.com/GlueOps/platform-helm-chart-platform.git?ref=v0.42.0"
+  source                                     = "git::https://github.com/GlueOps/platform-helm-chart-platform.git?ref=v0.43.0-rc10"
   captain_repo_b64encoded_private_deploy_key = base64encode(module.captain_repository[each.value.environment_name].private_deploy_key)
   captain_repo_ssh_clone_url                 = module.captain_repository[each.value.environment_name].ssh_clone_url
   this_is_development                        = var.this_is_development
@@ -58,6 +58,8 @@ module "glueops_platform_helm_values" {
   loki_aws_secret_key                        = aws_iam_access_key.loki_s3[each.value.environment_name].secret
   loki_exporter_aws_access_key               = aws_iam_access_key.loki_log_exporter_s3[each.value.environment_name].id
   loki_exporter_aws_secret_key               = aws_iam_access_key.loki_log_exporter_s3[each.value.environment_name].secret
+  fluentbit_exporter_aws_access_key          = aws_iam_access_key.fluentbit_log_exporter_s3[each.value.environment_name].id
+  fluentbit_exporter_aws_secret_key          = aws_iam_access_key.fluentbit_log_exporter_s3[each.value.environment_name].secret
   certmanager_aws_access_key                 = aws_iam_access_key.certmanager[each.value.environment_name].id
   certmanager_aws_secret_key                 = aws_iam_access_key.certmanager[each.value.environment_name].secret
   externaldns_aws_access_key                 = aws_iam_access_key.externaldns[each.value.environment_name].id
@@ -104,7 +106,7 @@ resource "aws_s3_object" "platform_helm_values" {
 
 module "argocd_helm_values" {
   for_each             = local.environment_map
-  source               = "git::https://github.com/GlueOps/docs-argocd.git?ref=v0.12.1"
+  source               = "git::https://github.com/GlueOps/docs-argocd.git?ref=v0.13.0"
   tenant_key           = var.tenant_key
   cluster_environment  = each.value.environment_name
   client_secret        = random_password.dex_argocd_client_secret[each.value.environment_name].result
