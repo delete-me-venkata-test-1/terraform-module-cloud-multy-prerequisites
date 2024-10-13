@@ -28,7 +28,7 @@ EOF
 
 resource "aws_iam_policy" "mon_loki_s3" {
   provider = aws.clientaccount
-  for_each = module.mointoring_s3
+  for_each = module.mon_s3
   name     = "mon-loki-s3-${aws_route53_zone.clusters[each.key].name}"
   policy   = <<EOF
 {
@@ -54,7 +54,7 @@ EOF
 
 resource "aws_iam_policy" "mon_tempo_s3" {
   provider = aws.clientaccount
-  for_each = module.mointoring_s3
+  for_each = module.mon_s3
   name     = "mon-tempo-s3-${aws_route53_zone.clusters[each.key].name}"
   policy   = <<EOF
 {
