@@ -28,7 +28,7 @@ module "loki_s3" {
   enable_replication_and_versioning = false
 }
 
-module "mointoring_s3" {
+module "mon_s3" {
   source = "./modules/multy-s3-bucket/0.1.0"
   providers = {
     aws.primaryregion = aws.primaryregion
@@ -36,7 +36,7 @@ module "mointoring_s3" {
   }
   for_each = local.cluster_environments
 
-  bucket_name                       = "${local.bucket_name}-${each.value}-monitoring"
+  bucket_name                       = "${local.bucket_name}-${each.value}-mon"
   this_is_development               = var.this_is_development
   tenant_account_id                 = var.tenant_account_id
   primary_region                    = var.primary_region

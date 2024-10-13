@@ -26,10 +26,10 @@ EOF
 
 # Since the loki, tempo and thanos shares the same bucket, created the common and giving the path based security
 
-resource "aws_iam_policy" "mointoring_loki_s3" {
+resource "aws_iam_policy" "mon_loki_s3" {
   provider = aws.clientaccount
   for_each = module.mointoring_s3
-  name     = "mointoring-loki-s3-${aws_route53_zone.clusters[each.key].name}"
+  name     = "mon-loki-s3-${aws_route53_zone.clusters[each.key].name}"
   policy   = <<EOF
 {
     "Version": "2012-10-17",
@@ -43,8 +43,8 @@ resource "aws_iam_policy" "mointoring_loki_s3" {
             ],
             "Effect": "Allow",
             "Resource": [
-              "${module.mointoring_s3[each.key].primary_s3_bucket_arn}",
-              "${module.mointoring_s3[each.key].primary_s3_bucket_arn}/loki-logs/*"
+              "${module.mon_s3[each.key].primary_s3_bucket_arn}",
+              "${module.mon_s3[each.key].primary_s3_bucket_arn}/loki-logs/*"
             ]
         }
     ]
@@ -52,10 +52,10 @@ resource "aws_iam_policy" "mointoring_loki_s3" {
 EOF
 }
 
-resource "aws_iam_policy" "mointoring_tempo_s3" {
+resource "aws_iam_policy" "mon_tempo_s3" {
   provider = aws.clientaccount
   for_each = module.mointoring_s3
-  name     = "mointoring-tempo-s3-${aws_route53_zone.clusters[each.key].name}"
+  name     = "mon-tempo-s3-${aws_route53_zone.clusters[each.key].name}"
   policy   = <<EOF
 {
     "Version": "2012-10-17",
@@ -69,8 +69,8 @@ resource "aws_iam_policy" "mointoring_tempo_s3" {
             ],
             "Effect": "Allow",
             "Resource": [
-              "${module.mointoring_s3[each.key].primary_s3_bucket_arn}",
-              "${module.mointoring_s3[each.key].primary_s3_bucket_arn}/traces/*"
+              "${module.mon_s3[each.key].primary_s3_bucket_arn}",
+              "${module.mon_s3[each.key].primary_s3_bucket_arn}/traces/*"
             ]
         }
     ]
@@ -78,10 +78,10 @@ resource "aws_iam_policy" "mointoring_tempo_s3" {
 EOF
 }
 
-resource "aws_iam_policy" "mointoring_thanos_s3" {
+resource "aws_iam_policy" "mon_thanos_s3" {
   provider = aws.clientaccount
-  for_each = module.mointoring_s3
-  name     = "mointoring-thanos-s3-${aws_route53_zone.clusters[each.key].name}"
+  for_each = module.mon_s3
+  name     = "mon-thanos-s3-${aws_route53_zone.clusters[each.key].name}"
   policy   = <<EOF
 {
     "Version": "2012-10-17",
@@ -95,8 +95,8 @@ resource "aws_iam_policy" "mointoring_thanos_s3" {
             ],
             "Effect": "Allow",
             "Resource": [
-              "${module.mointoring_s3[each.key].primary_s3_bucket_arn}",
-              "${module.mointoring_s3[each.key].primary_s3_bucket_arn}/metrics/*"
+              "${module.mon_s3[each.key].primary_s3_bucket_arn}",
+              "${module.mon_s3[each.key].primary_s3_bucket_arn}/metrics/*"
             ]
         }
     ]
