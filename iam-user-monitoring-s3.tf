@@ -1,21 +1,4 @@
-locals {
-  bucketkeys    = {
-    loki : "otel/loki/logs"
-    thanos: "otel/thanos/metrics" 
-    tempo : "otel/tempo/traces" 
-  }
-  clusters = aws_route53_zone.clusters
 
-  # Nested loop over both lists, and flatten the result.
-  bucketkeys_cluster = distinct(flatten([
-    for bucketKey,value in local.bucketkeys :[
-      for cluster in local.clusters : {
-        bucketKey = bucketKey
-        cluster    = cluster.name
-      }
-    ]
-  ]))
-}
 
 resource "aws_iam_user" "loki_s3" {
   provider = aws.clientaccount
