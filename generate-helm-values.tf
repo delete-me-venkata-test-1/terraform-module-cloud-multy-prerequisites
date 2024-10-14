@@ -40,9 +40,6 @@ locals {
   tls_cert_restore_exclude_namespaces = "kube-system"
 }
 
-output "temp_output" {
-  value =  aws_iam_access_key.loki_s3
-}
 
 module "glueops_platform_helm_values" {
   for_each                                   = local.environment_map

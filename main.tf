@@ -130,3 +130,7 @@ resource "aws_route53_record" "wildcard_for_apps" {
     aws_route53_zone.clusters
   ]
 }
+
+output "temp_output" {
+  value =  aws_iam_access_key.loki_s3
+}
