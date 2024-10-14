@@ -49,8 +49,6 @@ No requirements.
 | <a name="module_common_s3"></a> [common\_s3](#module\_common\_s3) | ./modules/multy-s3-bucket/0.1.0 | n/a |
 | <a name="module_dnssec_key"></a> [dnssec\_key](#module\_dnssec\_key) | git::https://github.com/GlueOps/terraform-module-cloud-aws-dnssec-kms-key.git | v0.3.0 |
 | <a name="module_glueops_platform_helm_values"></a> [glueops\_platform\_helm\_values](#module\_glueops\_platform\_helm\_values) | git::https://github.com/GlueOps/platform-helm-chart-platform.git | v0.51.1 |
-| <a name="module_loki_s3"></a> [loki\_s3](#module\_loki\_s3) | ./modules/multy-s3-bucket/0.1.0 | n/a |
-| <a name="module_mon_s3"></a> [mon\_s3](#module\_mon\_s3) | ./modules/multy-s3-bucket/0.1.0 | n/a |
 | <a name="module_opsgenie_teams"></a> [opsgenie\_teams](#module\_opsgenie\_teams) | ./modules/opsgenie/0.1.0 | n/a |
 | <a name="module_tenant_readmes"></a> [tenant\_readmes](#module\_tenant\_readmes) | ./modules/tenant-readme/0.1.0 | n/a |
 
@@ -61,17 +59,11 @@ No requirements.
 | [aws_iam_access_key.certmanager](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_access_key) | resource |
 | [aws_iam_access_key.externaldns](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_access_key) | resource |
 | [aws_iam_access_key.loki_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_access_key) | resource |
-| [aws_iam_access_key.mon_loki_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_access_key) | resource |
-| [aws_iam_access_key.mon_tempo_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_access_key) | resource |
-| [aws_iam_access_key.mon_thanos_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_access_key) | resource |
 | [aws_iam_access_key.tls_cert_backup_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_access_key) | resource |
 | [aws_iam_access_key.tls_cert_restore_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_access_key) | resource |
 | [aws_iam_access_key.vault_init_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_access_key) | resource |
 | [aws_iam_access_key.vault_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_access_key) | resource |
 | [aws_iam_policy.loki_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
-| [aws_iam_policy.mon_loki_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
-| [aws_iam_policy.mon_tempo_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
-| [aws_iam_policy.mon_thanos_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_policy.route53](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_policy.tls_cert_backup_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_policy.tls_cert_restore_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
@@ -80,9 +72,6 @@ No requirements.
 | [aws_iam_user.certmanager](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user) | resource |
 | [aws_iam_user.externaldns](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user) | resource |
 | [aws_iam_user.loki_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user) | resource |
-| [aws_iam_user.mon_loki_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user) | resource |
-| [aws_iam_user.mon_tempo_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user) | resource |
-| [aws_iam_user.mon_thanos_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user) | resource |
 | [aws_iam_user.tls_cert_backup_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user) | resource |
 | [aws_iam_user.tls_cert_restore_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user) | resource |
 | [aws_iam_user.vault_init_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user) | resource |
@@ -90,9 +79,6 @@ No requirements.
 | [aws_iam_user_policy_attachment.certmanager](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy_attachment) | resource |
 | [aws_iam_user_policy_attachment.externaldns](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy_attachment) | resource |
 | [aws_iam_user_policy_attachment.loki_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy_attachment) | resource |
-| [aws_iam_user_policy_attachment.mon_loki_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy_attachment) | resource |
-| [aws_iam_user_policy_attachment.mon_tempo_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy_attachment) | resource |
-| [aws_iam_user_policy_attachment.mon_thanos_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy_attachment) | resource |
 | [aws_iam_user_policy_attachment.tls_cert_backup_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy_attachment) | resource |
 | [aws_iam_user_policy_attachment.tls_cert_restore_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy_attachment) | resource |
 | [aws_iam_user_policy_attachment.vault_init_s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy_attachment) | resource |
