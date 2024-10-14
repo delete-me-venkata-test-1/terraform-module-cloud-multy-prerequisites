@@ -2,7 +2,7 @@
 
 resource "aws_iam_user" "loki_s3" {
   provider = aws.clientaccount
-  for_each = { for entry in local.bucketkeys_cluster: "${entry.bucketKey}.${entry.cluster}" => entry }
+  for_each = { for entry in local.bucketkeys_cluster : "${entry.bucketKey}.${entry.cluster}" => entry }
   name     = "${each.value.bucketKey}-s3-${each.value.name}"
 }
 
