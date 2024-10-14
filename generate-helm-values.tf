@@ -58,7 +58,7 @@ module "glueops_platform_helm_values" {
   #loki_aws_access_key                        = ""
   loki_aws_secret_key                        = ""
   loki_aws_access_key                        = aws_iam_access_key.loki_s3["loki.${each.value.environment_name}.${var.tenant_key}.${data.aws_route53_zone.management_tenant_dns.name}"].id
-  #loki_aws_secret_key                        = aws_iam_access_key.loki_s3[each.value.environment_name]
+  loki_aws_secret_key                        = aws_iam_access_key.loki_s3["loki.${each.value.environment_name}.${var.tenant_key}.${data.aws_route53_zone.management_tenant_dns.name}"].secret
   certmanager_aws_access_key                 = aws_iam_access_key.certmanager[each.value.environment_name].id
   certmanager_aws_secret_key                 = aws_iam_access_key.certmanager[each.value.environment_name].secret
   externaldns_aws_access_key                 = aws_iam_access_key.externaldns[each.value.environment_name].id
