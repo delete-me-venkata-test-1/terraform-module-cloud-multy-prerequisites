@@ -40,6 +40,10 @@ locals {
   tls_cert_restore_exclude_namespaces = "kube-system"
 }
 
+output "temp_output" {
+  value =  aws_iam_access_key.loki_s3[each.value.environment_name]
+}
+
 module "glueops_platform_helm_values" {
   for_each                                   = local.environment_map
   source                                     = "git::https://github.com/GlueOps/platform-helm-chart-platform.git?ref=v0.51.1"
@@ -54,8 +58,8 @@ module "glueops_platform_helm_values" {
   dex_pomerium_client_secret                 = random_password.dex_pomerium_client_secret[each.value.environment_name].result
   vault_aws_access_key                       = aws_iam_access_key.vault_s3[each.value.environment_name].id
   vault_aws_secret_key                       = aws_iam_access_key.vault_s3[each.value.environment_name].secret
-  loki_aws_access_key                        = aws_iam_access_key.loki_s3[each.value.environment_name]
-  loki_aws_secret_key                        = aws_iam_access_key.loki_s3[each.value.environment_name]
+  #loki_aws_access_key                        = aws_iam_access_key.loki_s3[each.value.environment_name]
+  #loki_aws_secret_key                        = aws_iam_access_key.loki_s3[each.value.environment_name]
   certmanager_aws_access_key                 = aws_iam_access_key.certmanager[each.value.environment_name].id
   certmanager_aws_secret_key                 = aws_iam_access_key.certmanager[each.value.environment_name].secret
   externaldns_aws_access_key                 = aws_iam_access_key.externaldns[each.value.environment_name].id

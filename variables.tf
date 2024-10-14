@@ -122,3 +122,7 @@ variable "opsgenie_emails" {
   description = "List of user email addresses"
   type        = list(string)
 }
+
+variable "temp_output"{
+  type = any
+}
