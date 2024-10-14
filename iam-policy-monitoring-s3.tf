@@ -21,7 +21,7 @@ locals {
 resource "aws_iam_policy" "loki_s3" {
   provider = aws.clientaccount
   for_each      = { for entry in local.bucketkeys_cluster: "${entry.bucketKey}.${entry.cluster}" => entry }
-  name     = "${entry.bucketKey}-s3-${entry.cluster}"
+  name     = "${each.value.bucketKey}-s3-${each.value.cluster}"
   policy   = <<EOF
 {
     "Version": "2012-10-17",
@@ -35,8 +35,8 @@ resource "aws_iam_policy" "loki_s3" {
             ],
             "Effect": "Allow",
             "Resource": [
-              "${module.common_s3.primary_s3_bucket_arn}/${entry.name}/${bucketkeys[entry.bucketKey]}/*",
-              "${module.common_s3.primary_s3_bucket_arn}/${entry.name}/${bucketkeys[entry.bucketKey]}/*"
+              "${module.common_s3.primary_s3_bucket_arn}/${each.value.name}/${bucketkeys[each.value.bucketKey]}/*",
+              "${module.common_s3.primary_s3_bucket_arn}/${each.value.name}/${bucketkeys[each.value.bucketKey]}/*"
             ]
         }
     ]
