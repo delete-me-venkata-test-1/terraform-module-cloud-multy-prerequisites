@@ -123,6 +123,3 @@ variable "opsgenie_emails" {
   type        = list(string)
 }
 
-variable "temp_output"{
-  type = any
-}
