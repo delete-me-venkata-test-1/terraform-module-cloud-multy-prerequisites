@@ -35,8 +35,8 @@ resource "aws_iam_policy" "loki_s3" {
             ],
             "Effect": "Allow",
             "Resource": [
-              "${module.common_s3.primary_s3_bucket_arn}/${each.value.name}/*",
-              "${module.common_s3.primary_s3_bucket_arn}/${each.value.name}/*"
+              "${module.common_s3.primary_s3_bucket_arn}/${each.value.name}/${each.value.bucketKey}",
+              "${module.common_s3.primary_s3_bucket_arn}/${each.value.name}/${each.value.bucketKey}/*"
             ]
         }
     ]
