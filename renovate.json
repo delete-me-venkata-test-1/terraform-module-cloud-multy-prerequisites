@@ -275,7 +275,7 @@
       "matchStrings": [
         "ref.*=v?(?<currentValue>\\d+\\.\\d+\\.\\d+)\\s*"
       ],
-      "depNameTemplate": "glueops/codespaces",
+      "depNameTemplate": "glueops/terraform-module-provider-versions",
       "datasourceTemplate": "github-tags"
     },
     {
