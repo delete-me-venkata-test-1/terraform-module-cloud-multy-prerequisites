@@ -237,6 +237,17 @@
     {
       "customType": "regex",
       "fileMatch": [
+        "^captain-repo\\.tf$"
+      ],
+      "matchStrings": [
+        "terraform-module-provider-versions.git\\?ref=v?(?<currentValue>\\d+\\.\\d+\\.\\d+)\\s*"
+      ],
+      "depNameTemplate": "glueops/terraform-module-provider-versions",
+      "datasourceTemplate": "github-tags"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
         "^generate-helm-values\\.tf$"
       ],
       "matchStrings": [
@@ -265,17 +276,6 @@
         "codespace_version.* = \"v?(?<currentValue>\\d+\\.\\d+\\.\\d+)\\s*"
       ],
       "depNameTemplate": "glueops/codespaces",
-      "datasourceTemplate": "github-tags"
-    },
-    {
-      "customType": "regex",
-      "fileMatch": [
-        "^captain-repo\\.tf$"
-      ],
-      "matchStrings": [
-        "source.*terraform-module-provider-versions.*=v?(?<currentValue>\\d+\\.\\d+\\.\\d+)\\s*"
-      ],
-      "depNameTemplate": "glueops/terraform-module-provider-versions",
       "datasourceTemplate": "github-tags"
     },
     {
