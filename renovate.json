@@ -273,7 +273,7 @@
         "^captain-repo\\.tf$"
       ],
       "matchStrings": [
-        "terraform-module-provider-versions.*ref=v?(?<currentValue>\\d+\\.\\d+\\.\\d+)\\s*"
+            "source\\s*=\\s*\"git::https://github.com/GlueOps/terraform-module-provider-versions\\.git\\?ref=v?(?<currentValue>\\d+\\.\\d+\\.\\d+)\""
       ],
       "depNameTemplate": "glueops/terraform-module-provider-versions",
       "datasourceTemplate": "github-tags"
