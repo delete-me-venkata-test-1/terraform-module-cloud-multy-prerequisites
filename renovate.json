@@ -262,9 +262,9 @@
         "^modules/tenant-readme/0.1.0/readme\\.tf$"
       ],
       "matchStrings": [
-        "ref=v?(?<currentValue>\\d+\\.\\d+\\.\\d+)\\s*"
+        "codespace_version.* = \"v?(?<currentValue>\\d+\\.\\d+\\.\\d+)\\s*"
       ],
-      "depNameTemplate": "glueops/terraform-module-provider-versions",
+      "depNameTemplate": "glueops/codespaces",
       "datasourceTemplate": "github-tags"
     },
     {
@@ -273,7 +273,7 @@
         "^captain-repo\\.tf$"
       ],
       "matchStrings": [
-        "codespace_version.* = \"v?(?<currentValue>\\d+\\.\\d+\\.\\d+)\\s*"
+        "ref.*=v?(?<currentValue>\\d+\\.\\d+\\.\\d+)\\s*"
       ],
       "depNameTemplate": "glueops/codespaces",
       "datasourceTemplate": "github-tags"
